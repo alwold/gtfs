@@ -12,5 +12,9 @@ module GTFS
     def self.parse_calendar_dates(data, options={})
       return parse_models(data, options)
     end
+
+    def self.parse_calendar_dates_enumerator(data, options={})
+      return parse_models_enumerator(data, options)
+    end
   end
 end

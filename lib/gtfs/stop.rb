@@ -17,6 +17,10 @@ module GTFS
     def self.parse_stops(data, options={})
       return parse_models(data, options)
     end
+
+    def self.parse_stops_enumerator(data, options={})
+      return parse_models_enumerator(data, options)
+    end
   end
 end
 

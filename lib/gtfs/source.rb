@@ -68,6 +68,14 @@ module GTFS
           entity.send("parse_#{entity.name}".to_sym, f.read, options)
         end
       end
+
+      name = entity.name.to_s
+      name << "_enumerator"
+      define_method name.to_sym do
+        parse_file entity.filename do |f|
+          entity.send("parse_#{entity.name}_enumerator".to_sym, f.read, options)
+        end
+      end
     end
 
     def files

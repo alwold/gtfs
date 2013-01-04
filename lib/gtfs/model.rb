@@ -85,6 +85,22 @@ module GTFS
         end
         models
       end
+
+      def parse_models_enumerator(data, options={})
+        Enumerator.new do |yielder|
+          if !data.nil? && !data.empty?
+            CSV.parse(data, :headers => true) do |row|
+              attr_hash = {}
+              row.to_hash.each do |key, val|
+                attr_hash[key.gsub(/^#{prefix}/, '')] = val
+              end
+
+              model = self.new(attr_hash)
+              yielder << model if options[:strict] == false || model.valid?
+            end
+          end
+        end
+      end
     end
   end
 end
